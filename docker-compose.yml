@@ -6,6 +6,7 @@ services:
             - "80:8000"
         volumes:
             - ./www:/var/www/localhost/htdocs
+            - ./www/logs/apache2:/var/log/apache2
         links:
             - db
     db:
