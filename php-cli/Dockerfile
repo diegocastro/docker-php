@@ -4,9 +4,6 @@ MAINTAINER Diego Castro <castroc.diego@gmail.com>
 
 RUN apk add --no-cache \
     curl \
-    apache2 \
-    php5-apache2 \
-    php5-apcu \
     php5-curl \
     php5-gd \
     php5-iconv \
@@ -28,21 +25,13 @@ RUN apk add --no-cache \
     php5-posix \
     php5-exif
 
-# Fix apache warning about ServerName
-RUN echo ServerName 'local.dev' >> /etc/apache2/conf.d/httpd.conf
-
-# Activate mod_rewrite for apache
-RUN echo LoadModule rewrite_module modules/mod_rewrite.so >> /etc/apache2/conf.d/rewrite.conf
-
-# Allow .htaccess
-RUN sed -i '262s/AllowOverride None/AllowOverride All/' /etc/apache2/httpd.conf
-
-# Fix apache error for not having a pid
-RUN mkdir -p /run/apache2
-
 # Install composer
 RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
-EXPOSE 22 80
+RUN mkdir /www
 
-CMD ["httpd", "-D", "FOREGROUND"]
+WORKDIR /www
+
+VOLUME ["/www"]
+
+CMD ["php", "-a"]

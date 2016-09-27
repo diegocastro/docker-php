@@ -3,7 +3,8 @@ services:
     web:
         build: .
         ports:
-            - "80:8000"
+            - "80:80"
+            - "22:22"
         volumes:
             - ./www:/var/www/localhost/htdocs
             - ./www/logs/apache2:/var/log/apache2
@@ -15,3 +16,9 @@ services:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
+    cli:
+        build: ./php-cli
+        volumes:
+            - "$VOLUMES_CLI"
+        links:
+            - db
