@@ -43,6 +43,8 @@ RUN mkdir -p /run/apache2
 # Install composer
 RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
+COPY local.ini /etc/php5/conf.d
+
 EXPOSE 22 80
 
 CMD ["httpd", "-D", "FOREGROUND"]

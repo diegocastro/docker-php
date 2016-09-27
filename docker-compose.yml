@@ -1,7 +1,7 @@
 version: "2"
 services:
     web:
-        build: .
+        build: ./php
         ports:
             - "80:80"
             - "22:22"
@@ -10,15 +10,30 @@ services:
             - ./www/logs/apache2:/var/log/apache2
         links:
             - db
+        networks:
+            main:
+                ipv4_address: 172.21.0.3
     db:
         image: mysql:5.5
         ports:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
+        networks:
+            - main
     cli:
         build: ./php-cli
         volumes:
             - "$VOLUMES_CLI"
         links:
             - db
+        networks:
+            - main
+networks:
+    main:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.21.0.0/24
+                  gateway: 172.21.0.1
