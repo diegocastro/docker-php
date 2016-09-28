@@ -47,4 +47,4 @@ COPY local.ini /etc/php5/conf.d
 
 EXPOSE 22 80
 
-CMD ["httpd", "-D", "FOREGROUND"]
+CMD ["httpd", "-DFOREGROUND"]
