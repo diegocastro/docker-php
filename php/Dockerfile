@@ -27,6 +27,7 @@ RUN apk add --no-cache \
     php5-ctype \
     php5-posix \
     php5-exif
+    # php5-xdebug@edge
 
 # Fix apache warning about ServerName
 RUN echo ServerName 'local.dev' >> /etc/apache2/conf.d/httpd.conf
