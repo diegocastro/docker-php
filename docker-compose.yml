@@ -8,8 +8,6 @@ services:
         volumes:
             - "$PROJECTS/www:/var/www/localhost/htdocs"
             - "$PROJECTS/www/logs/apache2:/var/log/apache2"
-            # - ./www:/var/www/localhost/htdocs
-            # - ./www/logs/apache2:/var/log/apache2
         links:
             - db
         networks:
