@@ -46,7 +46,7 @@ RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar &&
 
 COPY local.ini /etc/php5/conf.d
 
-RUN chown -R 1000:www-data /var/www/localhost/htdocs
+RUN chown -R 1000:www-data /var/www/localhost/htdocs & chmod -R 775 /var/www/localhost/htdocs
 
 EXPOSE 22 80
 
