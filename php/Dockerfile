@@ -45,9 +45,10 @@ RUN mkdir -p /run/apache2
 RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
 COPY local.ini /etc/php5/conf.d
+COPY run.sh /usr/local/bin
 
 RUN chown -R 1000:www-data /var/www/localhost/htdocs & chmod -R 775 /var/www/localhost/htdocs
 
 EXPOSE 22 80
 
-CMD ["httpd", "-DFOREGROUND"]
+CMD ["/usr/local/bin/run.sh"]
