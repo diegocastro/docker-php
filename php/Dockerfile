@@ -47,7 +47,7 @@ RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar &&
 COPY local.ini /etc/php5/conf.d
 COPY run.sh /usr/local/bin
 
-RUN chown -R 1000:www-data /var/www/localhost/htdocs & chmod -R 775 /var/www/localhost/htdocs
+RUN adduser -u 1000 -G www-data -D -s /bin/ash diego
 
 EXPOSE 22 80
 
