@@ -19,7 +19,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
         networks:
-            - main
+            main:
+                ipv4_address: 172.21.0.4
     cli:
         build: ./php-cli
         volumes:
@@ -28,6 +29,14 @@ services:
             - db
         networks:
             - main
+    mailhog:
+        build: ./mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+        networks:
+            main:
+                ipv4_address: 172.21.0.5
 networks:
     main:
         driver: bridge

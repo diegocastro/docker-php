@@ -1,4 +1,5 @@
-FROM alpine:3.4
+# FROM alpine:3.4
+FROM alpine:edge
 
 MAINTAINER Diego Castro <castroc.diego@gmail.com>
 
@@ -26,8 +27,8 @@ RUN apk add --no-cache \
     php5-phar \
     php5-ctype \
     php5-posix \
-    php5-exif
-    # php5-xdebug@edge
+    php5-exif \
+    php5-xdebug
 
 # Fix apache warning about ServerName
 RUN echo ServerName 'local.dev' >> /etc/apache2/conf.d/httpd.conf
@@ -38,6 +39,10 @@ RUN echo LoadModule rewrite_module modules/mod_rewrite.so >> /etc/apache2/conf.d
 # Allow .htaccess
 RUN sed -i '262s/AllowOverride None/AllowOverride All/' /etc/apache2/httpd.conf
 
+# Apache as local user
+RUN sed -i 's/User apache/User diego/' /etc/apache2/httpd.conf
+RUN sed -i 's/Group apache/Group diego/' /etc/apache2/httpd.conf
+
 # Fix apache error for not having a pid
 RUN mkdir -p /run/apache2
 
@@ -47,8 +52,8 @@ RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar &&
 COPY local.ini /etc/php5/conf.d
 COPY run.sh /usr/local/bin
 
-RUN adduser -u 1000 -G www-data -D -s /bin/ash diego
+RUN adduser -u 1000 -D -s /bin/ash diego
 
 EXPOSE 22 80
 
-CMD ["/usr/local/bin/run.sh"]
+CMD ["httpd", "-DFOREGROUND"]
