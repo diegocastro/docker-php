@@ -1,6 +1,6 @@
 ## Run docker using user namespace
 
-Èdit this file `/etc/subuid` and add the line below:
+Edit this file `/etc/subuid` and add the line below:
 
 ```sh
 diego:1000:1

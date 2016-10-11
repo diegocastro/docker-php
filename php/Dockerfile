@@ -40,8 +40,8 @@ RUN echo LoadModule rewrite_module modules/mod_rewrite.so >> /etc/apache2/conf.d
 RUN sed -i '262s/AllowOverride None/AllowOverride All/' /etc/apache2/httpd.conf
 
 # Apache as local user
-# RUN sed -i 's/User apache/User diego/' /etc/apache2/httpd.conf
-# RUN sed -i 's/Group apache/Group diego/' /etc/apache2/httpd.conf
+RUN sed -i 's/User apache/User dev/' /etc/apache2/httpd.conf
+RUN sed -i 's/Group apache/Group dev/' /etc/apache2/httpd.conf
 
 # Fix apache error for not having a pid
 RUN mkdir -p /run/apache2
@@ -51,7 +51,7 @@ RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar &&
 
 COPY local.ini /etc/php5/conf.d
 
-# RUN adduser -u 1000 -D -s /bin/ash diego
+RUN adduser -u 1000 -D -s /bin/ash dev
 
 WORKDIR /var/www/localhost/htdocs
 
