@@ -1,4 +1,3 @@
-# FROM alpine:3.4
 FROM alpine:edge
 
 MAINTAINER Diego Castro <castroc.diego@gmail.com>
@@ -45,6 +44,9 @@ RUN sed -i 's/Group apache/Group dev/' /etc/apache2/httpd.conf
 
 # Fix apache error for not having a pid
 RUN mkdir -p /run/apache2
+
+# Apache gets grumpy about PID files pre-existing
+RUN rm -f /var/run/apache2/apache2.pid
 
 # Install composer
 RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer

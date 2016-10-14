@@ -21,6 +21,15 @@ services:
         networks:
             main:
                 ipv4_address: 172.21.0.4
+    cli:
+        build: ./php-cli
+        volumes:
+            - "$PWD:/var/www/localhost/htdocs"
+        links:
+            - db
+        user: $USER
+        networks:
+            - main
     mailhog:
         build: ./mailhog
         ports:
