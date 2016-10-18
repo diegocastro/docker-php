@@ -46,10 +46,7 @@ RUN sed -i 's/Group apache/Group dev/' /etc/apache2/httpd.conf
 RUN mkdir -p /run/apache2
 
 # Apache gets grumpy about PID files pre-existing
-RUN rm -f /var/run/apache2/apache2.pid
-
-# Install composer
-RUN curl -sSO https://getcomposer.org/composer.phar && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
+RUN rm -f /var/run/apache2/apache2.pid && rm -f /run/apache2/apache2.pid
 
 COPY local.ini /etc/php5/conf.d
 
