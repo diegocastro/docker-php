@@ -4,6 +4,7 @@ services:
         build: ./php
         ports:
             - "80:80"
+            - "8000:8000"
         volumes:
             - "$PROJECTS/www:/var/www/localhost/htdocs"
             - "$PROJECTS/www/logs/apache2:/var/log/apache2"

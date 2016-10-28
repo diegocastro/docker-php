@@ -3,6 +3,7 @@ FROM alpine:edge
 MAINTAINER Diego Castro <castroc.diego@gmail.com>
 
 RUN apk add --no-cache \
+    make \
     curl \
     apache2 \
     php5-apache2 \
