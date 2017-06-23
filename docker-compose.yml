@@ -6,13 +6,13 @@ services:
             - 80:80
             - 8000:8000
         volumes:
-            - /home/diego/Projetos/www:/var/www/localhost/htdocs
+            - ${WWWDIR}:/var/www/localhost/htdocs
             - ./volumes/web/composer:/composer
     db:
         image: mariadb:10
         ports:
             - 3306:3306
         environment:
-            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
             - ./volumes/db:/var/lib/mysql
