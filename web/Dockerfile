@@ -28,6 +28,10 @@ RUN composer --ansi --version --no-interaction
 RUN curl -f -L -o /usr/local/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
 	chmod +x /usr/local/bin/phpcs
 
+# Symfony installer
+RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && \
+	chmod +x /usr/local/bin/symfony 
+
 ENTRYPOINT ["/sbin/tini", "--"]
 
 EXPOSE 80
