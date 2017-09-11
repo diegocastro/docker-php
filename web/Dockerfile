@@ -1,6 +1,6 @@
 FROM alpine:3.5
 
-RUN apk add --no-cache tini git vim curl apache2 php5-apache2 php5-json php5-iconv php5-ctype php5-dom php5-xml php5-posix php5-intl php5-opcache php5-pdo_mysql php5-phar php5-openssl php5-curl php5-gd php5-mcrypt php5-zlib php5-soap php5-exif php5-xdebug
+RUN apk add --no-cache tini git vim curl apache2 php5-apache2 php5-json php5-iconv php5-ctype php5-dom php5-xml php5-posix php5-intl php5-opcache php5-pdo_mysql php5-phar php5-openssl php5-curl php5-gd php5-mcrypt php5-zlib php5-soap php5-exif php5-xdebug php5-ldap
 # apache2 gets grumpy if the pid folder is not there
 RUN mkdir -p /run/apache2
 # Run apache as local user
